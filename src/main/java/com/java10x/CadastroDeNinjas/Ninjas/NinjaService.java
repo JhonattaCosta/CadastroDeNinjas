@@ -11,6 +11,10 @@ public class NinjaService {
 
     private NinjaRepository ninjaRepository;
 
+    //Cria um novo ninja
+    public NinjaModel criarNinja(NinjaModel ninja){
+        return ninjaRepository.save(ninja);
+    }
     //Listar Todos os Ninjas
     public List<NinjaModel> listarNinjas(){
         return ninjaRepository.findAll();
@@ -22,9 +26,13 @@ public class NinjaService {
         return ninjaPorId.orElse(null);
     }
 
-    //Cria um novo ninja
-    public NinjaModel criarNinja(NinjaModel ninja){
-        return ninjaRepository.save(ninja);
+    //Alterar ninja
+    public NinjaModel atualizarNinja(Long id, NinjaModel ninjaAtualizado){
+        if(ninjaRepository.existsById(id)){
+            ninjaAtualizado.setId(id);
+            return ninjaRepository.save(ninjaAtualizado);
+        }
+        return null;
     }
 
     //Deletar ninja por ID - Tem que ser um metodo void
