@@ -12,6 +12,11 @@ public class MissoesService {
 
     private MissoesRepository missoesRepository;
 
+    //Criar Missão
+    public MissoesModel criarMissao(MissoesModel missoes){
+        return missoesRepository.save(missoes);
+    }
+
     //Listar Todas as Missoes
     public List<MissoesModel> listarMissoes(){
         return missoesRepository.findAll();
@@ -23,9 +28,13 @@ public class MissoesService {
         return missoesPorId.orElse(null);
     }
 
-    //Criar Missão
-    public MissoesModel criarMissao(MissoesModel missoes){
-        return missoesRepository.save(missoes);
+    //Alterar missao
+    public MissoesModel atualizarMissao(Long id, MissoesModel missaoAtualizada){
+        if(missoesRepository.existsById(id)){
+            missaoAtualizada.setId(id);
+            return missoesRepository.save(missaoAtualizada);
+        }
+        return null;
     }
 
     //Deletar Missão - Tem que ser void
