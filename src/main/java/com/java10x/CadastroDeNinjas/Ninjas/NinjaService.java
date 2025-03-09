@@ -1,8 +1,5 @@
 package com.java10x.CadastroDeNinjas.Ninjas;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -10,10 +7,13 @@ import java.util.Optional;
 public class NinjaService {
 
     private NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
     //Cria um novo ninja
-    public NinjaModel criarNinja(NinjaModel ninja){
-        return ninjaRepository.save(ninja);
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO){
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
+        ninja = ninjaRepository.save(ninja);
+        return ninjaMapper.map(ninja);
     }
     //Listar Todos os Ninjas
     public List<NinjaModel> listarNinjas(){
@@ -41,8 +41,9 @@ public class NinjaService {
     }
 
     //Constructor
-    public NinjaService(NinjaRepository ninjaRepository) {
-        this.ninjaRepository = ninjaRepository;
-    }
 
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
+        this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
+    }
 }
