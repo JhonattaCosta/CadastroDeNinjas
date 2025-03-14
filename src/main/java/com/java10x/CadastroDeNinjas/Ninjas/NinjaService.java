@@ -32,12 +32,33 @@ public class NinjaService {
 
     //Alterar ninja
     public NinjaDTO atualizarNinja(Long id, NinjaDTO ninjaDTO){
-        Optional<NinjaModel> ninjaExistente = ninjaRepository.findById(id);
-        if (ninjaExistente.isPresent()){
-            NinjaModel ninjaAtualizado = ninjaMapper.map(ninjaDTO);
-            ninjaAtualizado.setId(id);
-            NinjaModel ninjaSalvo = ninjaRepository.save(ninjaAtualizado);
-            return  ninjaMapper.map(ninjaSalvo);
+        Optional<NinjaModel> ninjaExistenteOpt = ninjaRepository.findById(id);
+        if (ninjaExistenteOpt.isPresent()){
+            NinjaModel ninjaExistente = ninjaExistenteOpt.get();
+
+            if (ninjaDTO.getNome() != null){
+                ninjaExistente.setNome(ninjaDTO.getNome());
+            }
+            if(ninjaDTO.getEmail() != null){
+                ninjaExistente.setEmail(ninjaDTO.getEmail());
+            }
+            if(ninjaDTO.getImgUrl() != null){
+                ninjaExistente.setImgUrl(ninjaDTO.getImgUrl());
+            }
+            if(ninjaDTO.getIdade() != 0){
+                ninjaExistente.setIdade(ninjaDTO.getIdade());
+            }
+            if(ninjaDTO.getRank() != null){
+                ninjaExistente.setRank(ninjaDTO.getRank());
+            }
+            if(ninjaDTO.getMissoes() != null) {
+                ninjaExistente.setMissoes(ninjaDTO.getMissoes());
+            }
+            //Salva o ninjaAtualizado
+            NinjaModel ninjaSalvo = ninjaRepository.save(ninjaExistente);
+
+            return ninjaMapper.map(ninjaSalvo);
+
         }
         return null;
     }
