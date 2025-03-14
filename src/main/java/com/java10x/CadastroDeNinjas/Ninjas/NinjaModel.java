@@ -17,11 +17,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NinjaModel {
 
-
-    /*ID A GENTE APENAS DECLARA PRO JAVA TRABALHAR PRA GENTE INCREMENTANDO O ID NO BANDO DE DADOS
-     * ENTÃO A GENTE NÃO PRECISA INSTANCIAR O ID POIS VAMOS UTILIZAR ANOTATIONS PARA DEFINIR O ID E A SEQUENCIA DELE.
-     *
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -39,10 +34,11 @@ public class NinjaModel {
     @Column(name = "idade")
     private int idade;
 
-    //@ManyToOne um ninja tem uma unica missao
+    @Column(name = "rank")
+    private String rank;
+
     @ManyToOne
-    @JoinColumn(name = "missoes_id")//Foreing Key ou chave estrangeira
+    @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
-
-
+    
 }
