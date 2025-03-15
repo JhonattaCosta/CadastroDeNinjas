@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 @Service
 public class NinjaService {
 
-    private NinjaRepository ninjaRepository;
-    private NinjaMapper ninjaMapper;
+    private final NinjaRepository ninjaRepository;
+    private final NinjaMapper ninjaMapper;
 
     //Cria um novo ninja
     public NinjaDTO criarNinja(NinjaDTO ninjaDTO){

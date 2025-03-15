@@ -10,7 +10,7 @@ import java.util.Objects;
 @RequestMapping("/ninjas")
 public class NinjaController {
 
-    private NinjaService ninjaService;
+    private final NinjaService ninjaService;
 
 
     //Adicionar Ninja
